@@ -4,12 +4,12 @@ require 'securerandom'
 
 module HikOpenapi
   class Api
-    def get
+    def self.get
       # TODO
       puts 'WIP'
     end
 
-    def post(path, body)
+    def self.post(path, body)
       uri = URI(HikOpenapi.config.host)
       uri.merge!(path)
 
