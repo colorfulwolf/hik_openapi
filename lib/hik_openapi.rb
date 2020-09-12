@@ -2,20 +2,24 @@
 
 require 'hik_openapi/version'
 require 'hik_openapi/configuration'
+require 'hik_openapi/api'
+require 'hik_openapi/result'
 
 module HikOpenapi
   class Error < StandardError; end
 
-  class << self
-    def config
-      return @config if defined?(@config)
+  def self.config
+    return @config if defined?(@config)
 
-      @config = Configuration.new
-      @config
-    end
+    @config = Configuration.new
+    @config
+  end
 
-    def setup(&block)
-      config.instance_exec(&block)
-    end
+  def self.setup(&block)
+    config.instance_exec(&block)
+  end
+
+  def self.api
+    Api
   end
 end
