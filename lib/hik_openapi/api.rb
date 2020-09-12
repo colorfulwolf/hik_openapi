@@ -20,15 +20,21 @@ module HikOpenapi
         headers = init_header('POST', uri.path)
         # headers.transform_values! { |v| v.force_encoding('iso-8859-1') }
 
-        request = Net::HTTP::Post.new(uri.request_uri, headers)
-        request.body = body.to_json
-        res = https.request(request)
+        begin
+          request = Net::HTTP::Post.new(uri.request_uri, headers)
+          request.body = body.to_json
+          res = https.request(request)
 
-        result = HikOpenapi::Result.new
-        result.code = res.code
-        result.body = JSON.parse(res.body.force_encoding('utf-8'))
-        result.origin = res
-        result
+          result = HikOpenapi::Result.new
+          result.code = res.code
+          result.body = JSON.parse(res.body.force_encoding('utf-8'))
+          result.origin = res
+          result
+        rescue StandardError => e
+          result = HikOpenapi::Result.new
+          result.error = HikOpenapi::Error.new(e)
+          result
+        end
       end
 
       private

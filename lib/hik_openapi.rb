@@ -15,8 +15,8 @@ module HikOpenapi
     @config
   end
 
-  def self.setup(&block)
-    config.instance_exec(&block)
+  def self.setup
+    yield config
   end
 
   def self.api
