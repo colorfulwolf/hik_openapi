@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
+require 'net/http'
+require 'json'
+require 'base64'
+require 'uri'
 require 'securerandom'
+require 'openssl'
 
 module HikOpenapi
   module Api
