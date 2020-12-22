@@ -21,6 +21,8 @@ module HikOpenapi
 
         https = Net::HTTP.new(uri.host, uri.port)
         https.use_ssl = true
+        https.open_timeout = 10
+        https.read_timeout = 10
         https.verify_mode = OpenSSL::SSL::VERIFY_NONE
         headers = init_header('POST', uri.path)
         # headers.transform_values! { |v| v.force_encoding('iso-8859-1') }
