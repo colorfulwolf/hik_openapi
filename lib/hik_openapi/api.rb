@@ -44,7 +44,7 @@ module HikOpenapi
         end
       end
 
-      private
+    private
 
       def init_header(method, path)
         headers = {
@@ -52,11 +52,11 @@ module HikOpenapi
           "Accept": '*/*',
           'x-ca-timestamp': (Time.now.to_f * 1000).to_i.to_s,
           'x-ca-nonce': SecureRandom.uuid,
-          'x-ca-key': HikOpenapi.config.app_key
+          'x-ca-key': HikOpenapi.config.app_key,
         }
 
         headers.merge({
-                        "x-ca-signature": sign(method, path, headers)
+                        "x-ca-signature": sign(method, path, headers),
                       })
       end
 
@@ -64,14 +64,13 @@ module HikOpenapi
         sign_str = headers.reject { |a| a.to_s.start_with?('x-ca') }.values.sort
         sign_str = sign_str.unshift(method).push(path).join("\n")
 
-        enc = Base64.encode64(
+        Base64.encode64(
           OpenSSL::HMAC.digest(
             OpenSSL::Digest.new('sha256'),
             HikOpenapi.config.app_secret,
             sign_str
           )
         ).strip
-        enc
       end
     end
   end

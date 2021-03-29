@@ -1,7 +1,12 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-# Specify your gem's dependencies in hik_openapi.gemspec
+gem 'rake', '~> 12.0'
+
+group :development, :test do
+  gem 'pry'
+  gem 'guard-rspec', require: false
+  gem 'rspec', '~> 3.0'
+  gem 'rubocop'
+end
+
 gemspec
-
-gem "rake", "~> 12.0"
-gem "rspec", "~> 3.0"

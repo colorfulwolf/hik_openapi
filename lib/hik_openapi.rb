@@ -2,8 +2,11 @@
 
 require 'hik_openapi/version'
 require 'hik_openapi/configuration'
-require 'hik_openapi/api'
 require 'hik_openapi/result'
+
+require 'hik_openapi/rest/api'
+require 'hik_openapi/rest/client'
+require 'hik_openapi/api'
 
 module HikOpenapi
   class Error < StandardError; end
