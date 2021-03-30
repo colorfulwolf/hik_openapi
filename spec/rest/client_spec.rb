@@ -11,14 +11,13 @@ RSpec.describe HikOpenapi::REST::Client do
       config.proxy = {host: '127.1', port: 8123}
     end
   end
+
   it 'client initialize' do
     expect(@client).not_to be nil
   end
-  it 'camera list' do
+
+  it 'camera preview' do
     res = @client.preview('0c908187618d4c6fa21b61ee71465581')
-    puts res
-    puts res.body
-    puts res.parse
     expect(res).not_to be nil
   end
 end

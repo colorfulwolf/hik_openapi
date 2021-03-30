@@ -2,6 +2,8 @@ require 'http'
 require 'json'
 require 'openssl'
 
+require 'hik_openapi/error'
+
 module HikOpenapi
   module REST
     class Request
@@ -66,7 +68,6 @@ module HikOpenapi
         error = error(code, body, headers)
         raise(error) if error
 
-        @rate_limit = Twitter::RateLimit.new(headers)
         body
       end
 
@@ -76,8 +77,8 @@ module HikOpenapi
           forbidden_error(body, headers)
         elsif !klass.nil?
           klass.from_response(body, headers)
-        elsif body&.is_a?(Hash) && (err = body.dig(:processing_info, :error))
-          HikOpenapi::Error::MediaError.from_processing_response(err, headers)
+          # elsif body&.is_a?(Hash) && (err = body.dig(:processing_info, :error))
+          #   HikOpenapi::Error::MediaError.from_processing_response(err, headers)
         end
       end
 

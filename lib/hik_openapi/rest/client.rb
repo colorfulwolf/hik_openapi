@@ -13,6 +13,14 @@ module HikOpenapi
         end
         yield(self) if block_given?
       end
+
+      def get(path, params)
+        ::HikOpenapi::REST::Request.new(self, :get, path, params)
+      end
+
+      def post(path, params)
+        ::HikOpenapi::REST::Request.new(self, :post, path, params)
+      end
     end
   end
 end

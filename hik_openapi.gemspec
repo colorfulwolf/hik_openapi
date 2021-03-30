@@ -2,6 +2,7 @@ require_relative 'lib/hik_openapi/version'
 
 Gem::Specification.new do |spec|
   spec.add_dependency 'http', '~> 4.4.1'
+  spec.add_dependency 'memoizable', '~> 0.4.2'
 
   spec.name          = 'hik_openapi'
   spec.version       = HikOpenapi::VERSION
