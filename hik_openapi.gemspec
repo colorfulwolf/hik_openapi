@@ -11,6 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'hikvision openapi for ruby.'
   spec.description   = 'hikvision openapi for ruby.'
   spec.homepage      = 'https://github.com/palytoxin/hik_openapi'
+  spec.licenses      = ['MIT']
   spec.required_ruby_version = Gem::Requirement.new('>= 2.4.0')
 
   spec.metadata['allowed_push_host'] = 'https://rubygems.org'
