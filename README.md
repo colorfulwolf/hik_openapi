@@ -6,7 +6,7 @@
   config.prefix = "/artemis"
   config.app_key = "app_key"
   config.app_secret = "app_secret"
-  config.proxy = { host: "127.0.0.1", port: 8123 } if Rails.env.development?
+  config.proxy = { host: "127.0.0.1", port: 8123 }
 end
 
 params = {
