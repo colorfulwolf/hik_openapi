@@ -1,27 +1,22 @@
 ## Usage
 
 ```ruby
-@client = HikOpenapi::REST::Client.new do |config|
-  config.host = 'https://192.168.1.2'
-  config.prefix = '/artemis'
-  config.app_key = '1234'
-  config.app_secret = 'asdf'
-  config.proxy = {host: '127.1', port: 8123}
+@client = HikOpenapi::Client.new do |config|
+  config.host = "https://192.168.3.230"
+  config.prefix = "/artemis"
+  config.app_key = "app_key"
+  config.app_secret = "app_secret"
+  config.proxy = { host: "127.0.0.1", port: 8123 } if Rails.env.development?
 end
 
-@client.preview('0c908187618d4c6fa21b61ee71465581')
-@client.preview('0c908187618d4c6fa21b61ee71465581', 0, 'rtmp', 0, '')
+params = {
+  'cameraIndexCode': [url],
+  'streamType':      0,
+  'protocol':        [video_type],
+  'transmode':       0,
+  'expand':          "transcode=0",
+}
 
-OR
+res = @client.post("/api/video/v1/cameras/previewURLs", params)
 
-request = @client.post("/api/video/v1/cameras/previewURLs",{
-    "cameraIndexCode": "0c908187618d4c6fa21b61ee71465581",
-    'streamType': 0,
-    'protocol': 'rtmp',
-    'transmode': 0,
-    'expand': 'transcode=0'
-})
-result = request.perform
 ```
-
-REPL `require 'hik_openapi/rest/client'`
