@@ -42,7 +42,7 @@ module HikOpenapi
       ctx.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
       response = http_client.headers(sign_headers(@headers)).public_send(@request_method, @uri.to_s, request_options.merge(ssl_context: ctx))
-      response_body = response.body.empty? ? '' : symbolize_keys!(response.parse)
+      response_body = response.code == 200 ? symbolize_keys!(response.parse) : {}
       response_headers = response.headers
       {
         headers: response_headers,
